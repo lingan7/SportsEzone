@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status 
 from django.contrib.auth.models import User
 
-from .serializers import RegisterSerializer
+from .models import Product
+from .serializers import RegisterSerializer, ProductSerializer
 
 @api_view(['GET'])
 def hello_api(request):
@@ -27,6 +28,12 @@ def basic_login(request):
         return Response({"message":"Login Successful"}, status = status.HTTP_200_OK)
     except User.DoesNotExist:
         return Response({"message":"Invalid Credentials"}, status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def product_list(request):
+    products = Product.objects.all()
+    serializer = ProductSerializer(products,many=True)
+    return Response(serializer.data)
     
 
 
