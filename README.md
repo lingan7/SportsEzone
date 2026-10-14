@@ -1,3 +1,4 @@
+```
 SportsEzone/
 ├── backend/                  # Django project
 │   ├── manage.py
@@ -17,3 +18,4 @@ SportsEzone/
 │       ├── LoginPage.jsx
 │       └── ProductListPage.jsx
 └── templates/                # Static HTML mockups used to design the pages
+```
