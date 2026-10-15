@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Product
+from .models import Product, Order
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -15,3 +15,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = "__all__" #special literal get all the fields inside the model 
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Order
+        fields = "__all__"
+

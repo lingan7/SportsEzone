@@ -1,9 +1,11 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
+import { NavLink } from 'react-router-dom';
 
 export default function ProductListPage() {
 
 const [products, setProducts] = useState([]);
+const username = localStorage.getItem("username");
 
 useEffect(() => {
     fetch("http://127.0.0.1:8000/products")
@@ -26,7 +28,7 @@ useEffect(() => {
       </nav>
 
       <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-600">Hello, Logesh</span>
+        <span className="text-sm text-gray-600">Hello,{username}</span>
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-700 text-sm font-semibold text-white">
           L
         </div>
@@ -58,7 +60,7 @@ useEffect(() => {
             <span className="rounded bg-gray-100 px-2 py-1">{product.location}</span>
           </div>
           <div className="mt-4 flex justify-end">
-            <button className="text-sm font-medium text-blue-700 hover:underline">View Details →</button>
+            <NavLink to={`/order/${product.id}`} className="text-sm font-medium text-blue-700 hover:underline">View Details →</NavLink>
           </div>
         </div> 
             )

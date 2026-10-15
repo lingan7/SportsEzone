@@ -1,5 +1,6 @@
 import React from 'react'
 import { useActionState } from "react"
+import { NavLink, useNavigate } from 'react-router-dom';
 
 async function loginAction(_,formData) {
     const json = Object.fromEntries(formData);
@@ -12,12 +13,23 @@ async function loginAction(_,formData) {
     })
 
     const data = await res.json();
+
+    if (res.ok){
+        localStorage.setItem("userId",data.user_id);
+        localStorage.setItem("username",data.username);
+
+    }
     return data.message || "Login Failed"
 }
 
 export default function LoginPage() {
 
   const [message, formAction, isPending] = useActionState(loginAction, "", {withPending : true});  
+
+  const navigate = useNavigate();
+  if(message == "Login Successful"){
+    navigate("/products")
+  }
   return (
     <div className="bg-gray-50 text-gray-800">
 
@@ -97,10 +109,10 @@ export default function LoginPage() {
 
 
     <p className="text-sm text-center text-gray-600">
-        New to SportsEzone?
-        <a href="#" className="text-blue-700 font-medium hover:underline">
-            Create an account
-        </a>
+        New to SportsEzone? 
+        <NavLink to={"/register"} className="text-blue-700 font-medium hover:underline">
+            Register
+        </NavLink>
     </p>
 </form>
 </section>
